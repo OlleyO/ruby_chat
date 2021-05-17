@@ -34,6 +34,11 @@ class RoomsController < ApplicationController
         render :new
       end
     end
+
+    def show
+      @room_message = RoomMessage.new room: @room
+      @room_messages = @room.room_messages.includes(:user)
+    end
   
     protected
   
@@ -45,4 +50,6 @@ class RoomsController < ApplicationController
     def permitted_parameters
       params.require(:room).permit(:name)
     end
+
+    
   end
